@@ -1,0 +1,218 @@
+header img
+{
+  width: 10%;
+  height: auto;
+  float: right;
+  margin-top: 20px;
+}
+
+body
+{
+  background-color: #333;
+  color: white;
+  font-size: 18px;
+}
+
+.titulos
+{
+  color: black;
+}
+
+ul 
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+  font-size: 18px;
+}
+
+li 
+{
+  float: left;
+  font-size: 18px;
+}
+
+li a, .lista
+{
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+li a:hover, .listado:hover .lista
+{
+  background-color: #111;
+}
+
+li .listado
+{
+  display: inline-block;
+
+}
+
+.contenido-lista 
+{
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.contenido-lista a 
+{
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.contenido-lista a:hover 
+{
+  background-color: #C81D11;
+}
+
+.listado:hover .contenido-lista 
+{
+  display: block;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active
+{
+  background-color: #C81D11;
+}
+
+img
+{
+  height: auto;
+  width: 100px; 
+  margin: 5px;
+}
+
+.grid-container
+ {
+  border: solid 3px black;
+  display: grid;
+  grid-column-gap: 50px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  width: 95%; 
+}
+
+.grid-item
+{
+  border: solid 3px black;
+  margin: 20px;
+  background-color: #C81D11;
+  padding: 10px;
+}
+ 
+ .grid-container2 
+ {
+  display: grid;
+  grid-row-gap: 50px;
+  grid-template-rows: auto auto auto;
+  padding: 10px;
+  width: 95%;
+  }
+.anuncio
+{
+  border-radius: 15px;
+  border: solid 3px black;
+  margin: 20px;
+  background-color: #C81D11;
+  color: black;
+}
+.video
+{
+  width: 100%;
+}
+
+.imgjuego
+{
+  width: 45%;
+}
+iframe
+{
+  height: 500px;
+  width: 90%; 
+  margin: 5%;
+}
+.imgtt
+{
+  width: 90%; 
+  margin: 5%;
+}
+table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 3px solid black;
+  text-align: left;
+  padding: 8px;
+  background-color: white;
+  color:black;
+}
+
+#objcss
+{
+  color: yellow;
+}
+#c1
+{
+background-color: #FF0000;
+}
+#c2
+{
+background-color: #00FF00;
+}
+#c3
+{
+background-color: #0000FF;
+}
+
+.colorgrid-container 
+{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 90%;
+  height: 100px;
+  margin: 5%;
+}
+.colorgrid-container2 
+{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 5%;
+  height: auto;
+  margin: 20px;
+}
+.colorgrid-item 
+{
+  padding: 3%;
+  width: 100%;
+  height: 100%;
+  font-size: 100%
+}
+a
+{
+  color: white;
+}
+script
+{
+  padding: 5%;
+}

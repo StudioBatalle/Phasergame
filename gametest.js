@@ -7,9 +7,13 @@ var ivida;
 var vida;
 var KeyJ
 var KeyK
+var KeyA
+var KeyW
+var KeyS
+var KeyD
 var jabd = 1;
 var tiempo = 0;
-var maxtiempo = 1000;
+var maxtiempo = 10000000000000000000;
 class Example extends Phaser.Scene {
 	constructor() {
 		super();
@@ -35,9 +39,13 @@ class Example extends Phaser.Scene {
 		//teclas
 		KeyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 		KeyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+		KeyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+		KeyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+		KeyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+		KeyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 		this.cursors = this.input.keyboard.createCursorKeys();
 		//this.cameras.main.setDeadzone(400, 200);
-		//this.cameras.main.setZoom(0.5);
+		//this.cameras.main.setZoom(2);
 		if (this.cameras.main.deadzone) {
 			const graphics = this.add.graphics().setScrollFactor(0);
 			graphics.lineStyle(2, 0x00ff00, 1);
@@ -45,6 +53,8 @@ class Example extends Phaser.Scene {
 		}
 		
 		//Jabali
+		//jabalis = this.physics.add.staticGroup();
+		//jabalis.create(50, 500, 'jabali').setScale(0.25,0.25).refreshBody();
 		this.jabali = this.physics.add.sprite(500, 300, 'jabali');
 		this.jabali.setScale(0.25,0.25)
 		this.anims.create({
@@ -149,10 +159,10 @@ class Example extends Phaser.Scene {
 		});
 	
 		//indicadores vida y aguante
-		ivida = this.add.sprite(750, 75, 'vida');
+		ivida = this.add.sprite(750, 25, 'vida').setScrollFactor(0.0005);
 		ivida.setScale(0.5, 0.5);
 		
-		iaguante = this.add.sprite(750, 100, 'aguante');
+		iaguante = this.add.sprite(750, 50, 'aguante').setScrollFactor(0.0005);
 		iaguante.setScale(0.5, 0.5);
 	
 		this.anims.create({
@@ -426,7 +436,7 @@ class Example extends Phaser.Scene {
 			repeat: -1
 		});
 	}
-	update() {
+	update(time, delta) {
 		nivvida = 3;
 		vida = 6;
 		nivaguante = 2;
@@ -625,9 +635,9 @@ class Example extends Phaser.Scene {
 		
 		if (jabd == 1)
 		{
-			this.jabali.X += 95;
+			this.jabali.setVelocityX(95);
 			this.jabali.anims.play('jabd', true);
-		 	tiempo += 0.25;
+		 	tiempo += 0.000000000000000000025;
 			if (tiempo > maxtiempo);
 			{
 				jabd = 0;
@@ -636,10 +646,10 @@ class Example extends Phaser.Scene {
 		} 
 		else 
 		{
-			this.jabali.X -= 95;
+			this.jabali.setVelocityX(-95);
 			this.jabali.anims.play('jabi', true);
-			tiempo += 0.25;
-			if (tiempo > maxtiempo);
+			tiempo += 0.000000000000000000025;
+			if (tiempo < maxtiempo);
 			{
 				jabd = 1;
 				tiempo = 0;
@@ -648,13 +658,14 @@ class Example extends Phaser.Scene {
 		//personaje
 		var cam = this.cameras.main;
 		this.player.setVelocity(0);
-		if (this.cursors.left.isDown) 
+		if (this.cursors.left.isDown || KeyA.isDown) 
 		{
 			if (KeyK.isDown)
 			{
 				this.player.setVelocityX(-120);
 				this.player.anims.play('rleft', true);
 				mirandoderecha = 0;
+				aguante -=1;
 			}
 			else
 			{
@@ -663,13 +674,14 @@ class Example extends Phaser.Scene {
 				mirandoderecha = 0;
 			}
 		}
-		else if (this.cursors.right.isDown) 
+		else if (this.cursors.right.isDown || KeyD.isDown) 
 		{
 			if (KeyK.isDown)
 			{
 				this.player.setVelocityX(120);
 				this.player.anims.play('rright', true);
 				mirandoderecha = 1;
+				aguante -=1;
 			}
 			else
 			{
@@ -678,13 +690,14 @@ class Example extends Phaser.Scene {
 				mirandoderecha = 1;
 			}
 		}
-		else if (this.cursors.up.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
+		else if (this.cursors.up.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyW.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
 		{
 			if(KeyK.isDown)
 			{
 				this.player.setVelocityY(-120);
 				this.player.anims.play('rup', true);
 				mirandoderecha = 2;
+				aguante -=1;
 			}
 			else
 			{
@@ -693,13 +706,14 @@ class Example extends Phaser.Scene {
 				mirandoderecha = 2;
 			}
 		}
-		else if (this.cursors.down.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
+		else if (this.cursors.down.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyS.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
 		{
 			if (KeyK.isDown)
 			{
 				this.player.setVelocityY(120);
 				this.player.anims.play('rdown', true);
 				mirandoderecha = 3;
+				aguante -=1;
 			}
 			else
 			{
@@ -747,8 +761,8 @@ class Example extends Phaser.Scene {
 const config = {
 	type: Phaser.AUTO,
 	parent: 'phaser-example',
-	width: 800,
-	height: 600,
+	width: 160*5,
+	height: 90*5,
 	physics: {
 		default: 'arcade',
 	},

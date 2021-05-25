@@ -1,10 +1,12 @@
 var mirandoderecha;
-var nivaguante;
+var nivaguante = 2;
 var iaguante;
-var aguante;
-var nivvida;
+var aguante = 14;
+var maxaguante;
+var nivvida = 2;
 var ivida;
-var vida;
+var vida = 2;
+var maxvida;
 var KeyJ
 var KeyK
 var KeyA
@@ -437,14 +439,175 @@ class Example extends Phaser.Scene {
 		});
 	}
 	update(time, delta) {
-		nivvida = 3;
-		vida = 6;
-		nivaguante = 2;
-		aguante = 15; 
+		 
 		//vida y aguante
 		//vida
+		vidaguante();
+		//jabali
+		
+		if (jabd == 1)
+		{
+			this.jabali.setVelocityX(95);
+			this.jabali.anims.play('jabd', true);
+		 	tiempo += 0.000000000000000000025;
+			if (tiempo > maxtiempo);
+			{
+				jabd = 0;
+				tiempo = 0;
+			}
+		} 
+		else 
+		{
+			this.jabali.setVelocityX(-95);
+			this.jabali.anims.play('jabi', true);
+			tiempo += 0.000000000000000000025;
+			if (tiempo < maxtiempo);
+			{
+				jabd = 1;
+				tiempo = 0;
+			}
+		}
+		//personaje
+		var cam = this.cameras.main;
+		this.player.setVelocity(0);
+		if (this.cursors.left.isDown || KeyA.isDown) 
+		{
+			if (KeyK.isDown && aguante > 0)
+			{
+				this.player.setVelocityX(-150);
+				this.player.anims.play('rleft', true);
+				mirandoderecha = 0;
+				aguante -=0.125;
+			}
+			else
+			{
+				this.player.setVelocityX(-90);
+				this.player.anims.play('left', true);
+				mirandoderecha = 0;
+				rellenaraguante();
+			}
+			vidaguante();
+		}
+		else if (this.cursors.right.isDown || KeyD.isDown) 
+		{
+			if (KeyK.isDown && aguante > 0)
+			{
+				this.player.setVelocityX(150);
+				this.player.anims.play('rright', true);
+				mirandoderecha = 1;
+				aguante -=0.125;
+			}
+			else
+			{
+				this.player.setVelocityX(90);
+				this.player.anims.play('right', true);
+				mirandoderecha = 1;
+				rellenaraguante();
+			}
+			vidaguante();
+		}
+		else if (this.cursors.up.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyW.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
+		{
+			if(KeyK.isDown && aguante > 0)
+			{
+				this.player.setVelocityY(-150);
+				this.player.anims.play('rup', true);
+				mirandoderecha = 2;
+				aguante -=0.125;
+			}
+			else
+			{
+				this.player.setVelocityY(-90);
+				this.player.anims.play('up', true);
+				mirandoderecha = 2;
+				rellenaraguante();
+			}
+			vidaguante();
+		}
+		else if (this.cursors.down.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyS.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
+		{
+			if (KeyK.isDown && aguante > 0)
+			{
+				this.player.setVelocityY(150);
+				this.player.anims.play('rdown', true);
+				mirandoderecha = 3;
+				aguante -=0.125;
+			}
+			else
+			{
+				this.player.setVelocityY(90);
+				this.player.anims.play('down', true);
+				mirandoderecha = 3;
+				rellenaraguante();
+			}
+			vidaguante();
+		}
+		else if (KeyJ.isDown)
+		{
+			//this.jabali.destroy();
+			if (mirandoderecha == 0)
+			{
+				this.player.anims.play('atql',true);
+			}
+			else if (mirandoderecha == 1) 
+			{
+				this.player.anims.play('atqr',true);
+			}
+			else if (mirandoderecha == 2)
+			{
+				this.player.anims.play('atqu',true);
+			}
+			else if (mirandoderecha == 3)
+			{
+				this.player.anims.play
+				('atqd',true);
+			}
+		}
+		else 
+		{
+			rellenaraguante();
+			if (mirandoderecha == 0)
+			{
+				this.player.anims.play('idlel', true);
+			}
+		
+			else
+			{
+				this.player.anims.play('idler', true);
+			}
+		}
+	}
+}
+
+const config = {
+	type: Phaser.AUTO,
+	parent: 'phaser-example',
+	width: 160*5,
+	height: 90*5,
+	physics: {
+		default: 'arcade',
+	},
+	fps: {
+		target: 30,
+		forceSetTimeOut: true
+	},
+	scene: [Example]
+};
+const game = new Phaser.Game(config);
+
+function rellenaraguante()
+{
+	if (aguante < maxaguante)
+	{
+		aguante += 0.0625;
+	}
+}
+
+function vidaguante()
+{
 		if (nivvida == 3)
 		{
+			maxvida = 6;
 			if(vida == 6)
 			{
 				ivida.anims.play('v3-6', true);
@@ -476,6 +639,7 @@ class Example extends Phaser.Scene {
 		}
 		else if (nivvida == 2)
 		{
+			maxvida = 5;
 			if(vida == 5)
 			{
 				ivida.anims.play('v2-5', true);
@@ -503,6 +667,7 @@ class Example extends Phaser.Scene {
 		}
 		else if (nivvida == 1)
 		{
+			maxvida = 4;
 			if(vida == 4)
 			{
 				ivida.anims.play('v1-4', true);
@@ -527,6 +692,7 @@ class Example extends Phaser.Scene {
 		//aguante
 		if (nivaguante == 2)
 		{
+			maxaguante = 15;
 			if(aguante == 15)
 			{
 				iaguante.anims.play('a2-15', true);
@@ -594,6 +760,7 @@ class Example extends Phaser.Scene {
 		}
 		else if (nivaguante == 1)
 		{
+			maxaguante = 8;
 			if(aguante == 8)
 			{
 				iaguante.anims.play('a1-8', true);
@@ -631,148 +798,4 @@ class Example extends Phaser.Scene {
 				iaguante.anims.play('a1-0', true);
 			}
 		}
-		//jabali
-		
-		if (jabd == 1)
-		{
-			this.jabali.setVelocityX(95);
-			this.jabali.anims.play('jabd', true);
-		 	tiempo += 0.000000000000000000025;
-			if (tiempo > maxtiempo);
-			{
-				jabd = 0;
-				tiempo = 0;
-			}
-		} 
-		else 
-		{
-			this.jabali.setVelocityX(-95);
-			this.jabali.anims.play('jabi', true);
-			tiempo += 0.000000000000000000025;
-			if (tiempo < maxtiempo);
-			{
-				jabd = 1;
-				tiempo = 0;
-			}
-		}
-		//personaje
-		var cam = this.cameras.main;
-		this.player.setVelocity(0);
-		if (this.cursors.left.isDown || KeyA.isDown) 
-		{
-			if (KeyK.isDown)
-			{
-				this.player.setVelocityX(-120);
-				this.player.anims.play('rleft', true);
-				mirandoderecha = 0;
-				aguante -=1;
-			}
-			else
-			{
-				this.player.setVelocityX(-90);
-				this.player.anims.play('left', true);
-				mirandoderecha = 0;
-			}
-		}
-		else if (this.cursors.right.isDown || KeyD.isDown) 
-		{
-			if (KeyK.isDown)
-			{
-				this.player.setVelocityX(120);
-				this.player.anims.play('rright', true);
-				mirandoderecha = 1;
-				aguante -=1;
-			}
-			else
-			{
-				this.player.setVelocityX(90);
-				this.player.anims.play('right', true);
-				mirandoderecha = 1;
-			}
-		}
-		else if (this.cursors.up.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyW.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
-		{
-			if(KeyK.isDown)
-			{
-				this.player.setVelocityY(-120);
-				this.player.anims.play('rup', true);
-				mirandoderecha = 2;
-				aguante -=1;
-			}
-			else
-			{
-				this.player.setVelocityY(-90);
-				this.player.anims.play('up', true);
-				mirandoderecha = 2;
-			}
-		}
-		else if (this.cursors.down.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyS.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
-		{
-			if (KeyK.isDown)
-			{
-				this.player.setVelocityY(120);
-				this.player.anims.play('rdown', true);
-				mirandoderecha = 3;
-				aguante -=1;
-			}
-			else
-			{
-				this.player.setVelocityY(90);
-				this.player.anims.play('down', true);
-				mirandoderecha = 3;
-			}
-		}
-		else if (KeyJ.isDown)
-		{
-			//this.jabali.destroy();
-			if (mirandoderecha == 0)
-			{
-				this.player.anims.play('atql',true);
-			}
-			else if (mirandoderecha == 1) 
-			{
-				this.player.anims.play('atqr',true);
-			}
-			else if (mirandoderecha == 2)
-			{
-				this.player.anims.play('atqu',true);
-			}
-			else if (mirandoderecha == 3)
-			{
-				this.player.anims.play
-				('atqd',true);
-			}
-		}
-		else 
-		{
-			if (mirandoderecha == 0)
-			{
-				this.player.anims.play('idlel', true);
-			}
-		
-			else
-			{
-				this.player.anims.play('idler', true);
-			}
-		}
-	}
 }
-
-const config = {
-	type: Phaser.AUTO,
-	parent: 'phaser-example',
-	width: 160*5,
-	height: 90*5,
-	physics: {
-		default: 'arcade',
-	},
-	fps: {
-		target: 30,
-		forceSetTimeOut: true
-	},
-	scene: [Example]
-};
-const game = new Phaser.Game(config);
-
-
-

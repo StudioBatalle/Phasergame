@@ -1,0 +1,16 @@
+{
+  	"authors": [
+  			{
+  				"name1": "Genta Kamekawa",
+  				"role1": "Developer"
+					"name2": "Sergi González",
+  				"role2": "Developer"
+  			}
+  		], 
+  	"require": {
+  		"php": ">=7.2.0"
+  	},
+  	"require-dev": {
+  		"heroku/heroku-buildpack-php": "*"
+  	}
+  }

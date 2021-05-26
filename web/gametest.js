@@ -1,3 +1,5 @@
+
+
 var mirandoderecha;
 var nivaguante = 2;
 var iaguante;
@@ -526,12 +528,22 @@ class Example extends Phaser.Scene {
 		}
 		else if (this.cursors.down.isDown && this.cursors.left.isUp && this.cursors.right.isUp || KeyS.isDown && this.cursors.left.isUp && this.cursors.right.isUp) 
 		{
-			if (KeyK.isDown && aguante > 0)
+			if (KeyK.isDown)
 			{
-				this.player.setVelocityY(150);
-				this.player.anims.play('rdown', true);
-				mirandoderecha = 3;
-				aguante -=0.125;
+				if (aguante > 0)
+				{
+					this.player.setVelocityY(150);
+					this.player.anims.play('rdown', true);
+					mirandoderecha = 3;
+					aguante -=0.125;
+				}
+				else
+				{
+					this.player.setVelocityY(90);
+					this.player.anims.play('down', true);
+					mirandoderecha = 3;
+					rellenaraguante();
+				}	
 			}
 			else
 			{
@@ -586,6 +598,10 @@ const config = {
 	height: 90*5,
 	physics: {
 		default: 'arcade',
+		physics:{
+			debug : true,
+		},
+		
 	},
 	fps: {
 		target: 30,

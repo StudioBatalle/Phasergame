@@ -1,10 +1,8 @@
 {
   	"authors": [
   			{
-  				"name1": "Genta Kamekawa",
-  				"role1": "Developer"
-					"name2": "Sergi González",
-  				"role2": "Developer"
+  				"name": "Genta Kamekawa",
+  				"role": "Developer"
   			}
   		], 
   	"require": {
